@@ -1,13 +1,13 @@
 # Provider-Specific Settings
 
-The Postiz CLI supports platform-specific settings for each integration. Different platforms have different options and requirements.
+The Tadween CLI supports platform-specific settings for each integration. Different platforms have different options and requirements.
 
 ## How to Use Provider Settings
 
 ### Method 1: Command Line Flags
 
 ```bash
-postiz posts:create \
+tadween posts:create \
   -c "Your content" \
   -p <provider-type> \
   --settings '<json-settings>' \
@@ -17,7 +17,7 @@ postiz posts:create \
 ### Method 2: JSON File
 
 ```bash
-postiz posts:create --json post-with-settings.json
+tadween posts:create --json post-with-settings.json
 ```
 
 In the JSON file, specify settings per integration:
@@ -61,7 +61,7 @@ In the JSON file, specify settings per integration:
 
 **Example:**
 ```bash
-postiz posts:create \
+tadween posts:create \
   -c "Post content here" \
   -p reddit \
   --settings '{
@@ -89,7 +89,7 @@ postiz posts:create \
 
 **Example:**
 ```bash
-postiz posts:create \
+tadween posts:create \
   -c "Video description here" \
   -p youtube \
   --settings '{
@@ -117,7 +117,7 @@ postiz posts:create \
 
 **Example:**
 ```bash
-postiz posts:create \
+tadween posts:create \
   -c "Tweet content" \
   -p x \
   --settings '{
@@ -128,7 +128,7 @@ postiz posts:create \
 
 **With Community:**
 ```bash
-postiz posts:create \
+tadween posts:create \
   -c "Community tweet" \
   -p x \
   --settings '{
@@ -146,7 +146,7 @@ postiz posts:create \
 
 **Example:**
 ```bash
-postiz posts:create \
+tadween posts:create \
   -c "LinkedIn post" \
   -m "img1.jpg,img2.jpg,img3.jpg" \
   -p linkedin \
@@ -167,7 +167,7 @@ postiz posts:create \
 
 **Example:**
 ```bash
-postiz posts:create \
+tadween posts:create \
   -c "Instagram post" \
   -m "photo.jpg" \
   -p instagram \
@@ -180,7 +180,7 @@ postiz posts:create \
 
 **Story Example:**
 ```bash
-postiz posts:create \
+tadween posts:create \
   -c "Story content" \
   -m "story-image.jpg" \
   -p instagram \
@@ -214,13 +214,13 @@ Two independent axes decide whether a TikTok setting applies. A setting sent on 
 - `video_made_with_ai` (optional boolean, DIRECT_POST only, **video posts only**): Label the video as AI-generated
 - `content_posting_method` (required): `"DIRECT_POST"` or `"UPLOAD"`
   - **Use `"DIRECT_POST"`.** It publishes the post to TikTok.
-  - `"UPLOAD"` does **not** publish. It sends the media to the account's TikTok app inbox, where the user must manually finish and publish it within 24 hours or it is discarded. The Postiz API still reports the post as successfully published.
+  - `"UPLOAD"` does **not** publish. It sends the media to the account's TikTok app inbox, where the user must manually finish and publish it within 24 hours or it is discarded. The Tadween API still reports the post as successfully published.
   - `"UPLOAD"` also discards every other setting in this list except `title` — TikTok's inbox endpoint accepts no post info.
   - Only use `"UPLOAD"` when the user has **explicitly** asked to review or edit the post inside the TikTok app before publishing. Never infer it from the user saying "upload this video" — that means `"DIRECT_POST"`.
 
 **Example:**
 ```bash
-postiz posts:create \
+tadween posts:create \
   -c "TikTok video description" \
   -m "video.mp4" \
   -p tiktok \
@@ -325,7 +325,7 @@ For complex settings, it's easier to use JSON files:
 ```
 
 ```bash
-postiz posts:create --json reddit-post.json
+tadween posts:create --json reddit-post.json
 ```
 
 ### YouTube Example
@@ -362,7 +362,7 @@ postiz posts:create --json reddit-post.json
 ```
 
 ```bash
-postiz posts:create --json youtube-video.json
+tadween posts:create --json youtube-video.json
 ```
 
 ### Multi-Platform with Different Settings
@@ -433,7 +433,7 @@ postiz posts:create --json youtube-video.json
 To find the correct provider type for your integration:
 
 ```bash
-postiz integrations:list
+tadween integrations:list
 ```
 
 This will show the `provider` field for each integration, which corresponds to the `__type` in settings.

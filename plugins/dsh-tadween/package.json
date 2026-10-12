@@ -1,7 +1,7 @@
 {
-  "name": "dsh-postiz",
-  "version": "0.1.0",
-  "description": "DeepSeek Harness plugin that connects the agent to Postiz over MCP: list connected channels, fetch platform posting rules, and schedule, draft, or publish social media posts across 28+ platforms.",
+  "name": "dsh-tadween",
+  "version": "1.0.0",
+  "description": "DeepSeek Harness plugin that connects the agent to Tadween over MCP: list connected channels, fetch platform posting rules, and schedule, draft, or publish social media posts across 28+ platforms.",
   "type": "module",
   "main": "./lib/index.js",
   "exports": {
@@ -34,7 +34,7 @@
     "dsh",
     "dsh-plugin",
     "deepseek-harness",
-    "postiz",
+    "tadween",
     "mcp",
     "social-media",
     "social-media-scheduler",
@@ -42,21 +42,23 @@
     "automation"
   ],
   "author": {
-    "name": "Nevo David",
-    "email": "nevo@postiz.com",
-    "url": "https://postiz.com"
+    "name": "Xerk LLC",
+    "url": "https://tadween.app"
   },
-  "homepage": "https://github.com/gitroomhq/postiz-agent/tree/main/plugins/dsh-postiz#readme",
+  "homepage": "https://github.com/xerk/tadween-agent/tree/tadween/plugins/dsh-tadween#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gitroomhq/postiz-agent.git",
-    "directory": "plugins/dsh-postiz"
+    "url": "git+https://github.com/xerk/tadween-agent.git",
+    "directory": "plugins/dsh-tadween"
   },
   "bugs": {
-    "url": "https://github.com/gitroomhq/postiz-agent/issues"
+    "url": "https://github.com/xerk/tadween-agent/issues"
   },
   "license": "AGPL-3.0",
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "contributors": [
+    "Nevo David (original dsh-postiz, https://github.com/gitroomhq/postiz-agent)"
+  ]
 }

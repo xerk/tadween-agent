@@ -1,25 +1,30 @@
 {
-  "name": "postiz-agent",
-  "description": "Postiz social media automation for AI agents — schedule and publish posts across 28+ platforms",
+  "name": "tadween-agent",
+  "description": "Tadween social media automation for AI agents — schedule and publish posts across 28+ platforms",
   "owner": {
-    "name": "Nevo David",
-    "email": "nevo@postiz.com"
+    "name": "Xerk LLC",
+    "url": "https://tadween.app"
   },
   "plugins": [
     {
-      "name": "postiz",
-      "description": "Postiz social media automation. Schedule posts, manage integrations, upload media, and track analytics across 28+ platforms including X, LinkedIn, Reddit, YouTube, TikTok, and Instagram.",
+      "name": "tadween",
+      "description": "Tadween social media automation. Schedule posts, manage integrations, upload media, and track analytics across 28+ platforms including X, LinkedIn, Reddit, YouTube, TikTok, and Instagram.",
       "category": "productivity",
-      "source": { "type": "local", "path": "./" },
-      "homepage": "https://postiz.com",
+      "source": {
+        "type": "local",
+        "path": "./"
+      },
+      "homepage": "https://tadween.app",
       "keywords": [
-        "postiz",
+        "tadween",
         "social media scheduler",
         "social media agentic scheduler",
         "schedule social media posts",
         "social media automation"
       ],
-      "domains": ["postiz.com"]
+      "domains": [
+        "tadween.app"
+      ]
     }
   ]
 }

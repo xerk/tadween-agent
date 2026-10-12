@@ -1,0 +1,104 @@
+name: Publish to npm
+
+# Publishes the `tadween` CLI (repo root) or the `dsh-tadween` bundle
+# (plugins/dsh-tadween) to npm with provenance.
+#
+#   - Push a tag `v1.0.1` to publish the CLI, `dsh-v1.0.1` to publish dsh-tadween.
+#     The tag must match the `version` in that package's package.json.
+#   - Or run it by hand from the Actions tab (workflow_dispatch). `dry_run`
+#     runs `npm publish --dry-run` and prints the tarball without publishing.
+#
+# Needs the repository secret NPM_TOKEN (an npm automation / granular token
+# with publish rights on the package).
+
+on:
+  push:
+    tags:
+      - 'v*'
+      - 'dsh-v*'
+  workflow_dispatch:
+    inputs:
+      package:
+        description: Package to publish
+        type: choice
+        options:
+          - tadween
+          - dsh-tadween
+        default: tadween
+      dry_run:
+        description: Dry run (no publish)
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pick the package
+        id: pkg
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            case "${GITHUB_REF_NAME}" in
+              dsh-v*) echo "dir=plugins/dsh-tadween" >> "$GITHUB_OUTPUT"; echo "version=${GITHUB_REF_NAME#dsh-v}" >> "$GITHUB_OUTPUT" ;;
+              v*)     echo "dir=." >> "$GITHUB_OUTPUT"; echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT" ;;
+            esac
+            echo "dry_run=false" >> "$GITHUB_OUTPUT"
+          else
+            if [ "${{ inputs.package }}" = "dsh-tadween" ]; then
+              echo "dir=plugins/dsh-tadween" >> "$GITHUB_OUTPUT"
+            else
+              echo "dir=." >> "$GITHUB_OUTPUT"
+            fi
+            echo "version=" >> "$GITHUB_OUTPUT"
+            echo "dry_run=${{ inputs.dry_run }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Check the tag matches package.json
+        if: steps.pkg.outputs.version != ''
+        working-directory: ${{ steps.pkg.outputs.dir }}
+        run: |
+          actual=$(node -p "require('./package.json').version")
+          if [ "$actual" != "${{ steps.pkg.outputs.version }}" ]; then
+            echo "Tag says ${{ steps.pkg.outputs.version }} but package.json says $actual"
+            exit 1
+          fi
+
+      - name: Install and build the CLI
+        if: steps.pkg.outputs.dir == '.'
+        run: |
+          pnpm install --no-frozen-lockfile
+          pnpm run build
+          node dist/index.js --help > /dev/null
+
+      - name: Test dsh-tadween
+        if: steps.pkg.outputs.dir == 'plugins/dsh-tadween'
+        working-directory: plugins/dsh-tadween
+        run: |
+          pnpm install --no-frozen-lockfile
+          pnpm test
+
+      - name: Publish
+        working-directory: ${{ steps.pkg.outputs.dir }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ "${{ steps.pkg.outputs.dry_run }}" = "true" ]; then
+            npm publish --access public --dry-run
+          else
+            npm publish --access public --provenance
+          fi

@@ -1,16 +1,16 @@
 {
-  "name": "postiz-agent",
+  "name": "tadween-agent",
   "owner": {
-    "name": "Nevo David",
-    "email": "nevo@postiz.com"
+    "name": "Xerk LLC",
+    "url": "https://tadween.app"
   },
   "metadata": {
-    "description": "Postiz social media automation skill for scheduling posts across 28+ platforms",
+    "description": "Tadween social media automation skill for scheduling posts across 28+ platforms",
     "version": "1.0.0"
   },
   "plugins": [
     {
-      "name": "postiz",
+      "name": "tadween",
       "description": "Social media automation CLI and MCP server for scheduling posts, managing integrations, uploading media, and tracking analytics across 28+ platforms including X, LinkedIn, LinkedIn Pages, Instagram, Facebook, Threads, YouTube, TikTok, Reddit, Pinterest, Bluesky, Mastodon, Google My Business, Discord, Slack, Telegram, Twitch, Kick, Lemmy, Farcaster, Nostr, VK, MeWe, Tumblr, Skool, Whop, Moltbook, Dribbble, Medium, Dev.to, Hashnode, WordPress, and ListMonk",
       "source": "./",
       "strict": false,

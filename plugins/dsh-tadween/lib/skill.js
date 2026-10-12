@@ -1,28 +1,28 @@
 /**
- * The `postiz` skill body registered on `ctx.skills`.
+ * The `tadween` skill body registered on `ctx.skills`.
  *
- * It teaches the agent the order of operations for the Postiz MCP tools that
- * the sibling `postiz-mcp` row exposes as `mcp__postiz__*`. Kept as a plain
+ * It teaches the agent the order of operations for the Tadween MCP tools that
+ * the sibling `tadween-mcp` row exposes as `mcp__tadween__*`. Kept as a plain
  * string so the plugin ships no extra files and needs no filesystem access.
  */
 
-export const SKILL_NAME = 'postiz'
+export const SKILL_NAME = 'tadween'
 
 export const SKILL_DESCRIPTION =
-  'Schedule, draft, or publish social media posts through Postiz (X, LinkedIn, Instagram, Facebook, Threads, TikTok, YouTube, Reddit, Bluesky, Mastodon, Discord, Slack, Telegram and more). Use when the user wants to post to social media, list connected channels, or plan a content calendar.'
+  'Schedule, draft, or publish social media posts through Tadween (X, LinkedIn, Instagram, Facebook, Threads, TikTok, YouTube, Reddit, Bluesky, Mastodon, Discord, Slack, Telegram and more). Use when the user wants to post to social media, list connected channels, or plan a content calendar.'
 
-export const SKILL_CONTENT = `# Postiz
+export const SKILL_CONTENT = `# Tadween
 
-Postiz is a social media scheduler. The \`mcp__postiz__*\` tools talk to the
-user's Postiz account. Always follow this order:
+Tadween is a social media scheduler. The \`mcp__tadween__*\` tools talk to the
+user's Tadween account. Always follow this order:
 
 ## 1. Find the channel
 
-Call \`mcp__postiz__integrationList\` to get connected accounts. Each entry has
+Call \`mcp__tadween__integrationList\` to get connected accounts. Each entry has
 an \`id\` (the integration ID), a \`name\`, and a \`platform\` such as \`x\`,
 \`linkedin\`, \`instagram\`, \`facebook\`, \`threads\`, \`tiktok\`, \`youtube\`,
 \`reddit\`, \`bluesky\`, \`mastodon\`, \`discord\`, \`slack\`, \`telegram\`.
-If the account has customer groups, \`mcp__postiz__groupList\` lists them and
+If the account has customer groups, \`mcp__tadween__groupList\` lists them and
 \`integrationList\` accepts a \`group\` filter.
 
 Never guess an integration ID. If the user names a platform that is not in the
@@ -30,11 +30,11 @@ list, say so and stop.
 
 ## 2. Learn the platform rules
 
-Call \`mcp__postiz__integrationSchema\` with \`{ platform, isPremium }\` before
+Call \`mcp__tadween__integrationSchema\` with \`{ platform, isPremium }\` before
 composing. It returns \`maxLength\`, \`rules\`, a \`settings\` JSON schema of
 required per-platform settings, and helper \`tools\` (for example: list Discord
 channels, search subreddits, list LinkedIn pages). Run helpers with
-\`mcp__postiz__triggerTool\` when a setting needs an ID you do not have.
+\`mcp__tadween__triggerTool\` when a setting needs an ID you do not have.
 
 ## 3. Compose the content
 
@@ -46,12 +46,12 @@ channels, search subreddits, list LinkedIn pages). Run helpers with
   each item is a new post in the thread; on comment platforms (LinkedIn,
   Facebook) the first item is the post and the rest are comments.
 - \`attachments\` are media URLs. To generate media first, use
-  \`mcp__postiz__generateImageTool\` or \`mcp__postiz__generateVideoTool\`
+  \`mcp__tadween__generateImageTool\` or \`mcp__tadween__generateVideoTool\`
   (check \`generateVideoOptions\` and \`videoFunctionTool\` for settings).
 
 ## 4. Schedule or publish
 
-Call \`mcp__postiz__schedulePostTool\` with a \`socialPost\` array. Each item:
+Call \`mcp__tadween__schedulePostTool\` with a \`socialPost\` array. Each item:
 
 \`\`\`json
 {
@@ -75,14 +75,13 @@ Call \`mcp__postiz__schedulePostTool\` with a \`socialPost\` array. Each item:
 
 ## 5. Review and adjust
 
-\`mcp__postiz__postsListTool\` lists posts between two dates.
-\`mcp__postiz__postSettingsTool\` updates the settings of a post that has not
+\`mcp__tadween__postsListTool\` lists posts between two dates.
+\`mcp__tadween__postSettingsTool\` updates the settings of a post that has not
 been published yet.
 
 ## Setup
 
 The tools are missing when no API key is configured. The key comes from the
-\`POSTIZ_API_KEY\` environment variable (Postiz → Settings → Developers →
-Public API). Self-hosted instances set \`baseUrl\` on the \`postiz\` row in the
+\`TADWEEN_API_KEY\` environment variable (Tadween → Settings → API & MCP). Self-hosted instances set \`baseUrl\` on the \`tadween\` row in the
 profile's \`cordis.patch.yml\`.
 `

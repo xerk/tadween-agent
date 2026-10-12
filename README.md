@@ -1,97 +1,87 @@
 <p align="center">
-  <img src="assets/logo.svg" alt="Postiz" width="96" />
+  <img src="assets/logo.svg" alt="Tadween" width="96" />
 </p>
 
 <p align="center">
   <strong>Schedule posts with agents to:</strong><br />
-  <a href="https://postiz.com/chatgpt">ChatGPT</a> ·
-  <a href="https://postiz.com/claude">Claude</a> ·
-  <a href="https://postiz.com/claude-cowork">Claude Cowork</a> ·
-  <a href="https://postiz.com/claude-code">Claude Code</a> ·
-  <a href="https://postiz.com/codex">Codex</a> ·
-  <a href="https://postiz.com/cursor">Cursor</a> ·
-  <a href="https://postiz.com/openclaw">OpenClaw</a> ·
-  <a href="https://postiz.com/hermes">Hermes Agent</a> ·
-  <a href="https://postiz.com/grok-bot">Grok Bot</a> ·
-  <a href="https://postiz.com/grok-build">Grok Build</a> ·
-  <a href="https://postiz.com/muse">Muse</a> ·
-  <a href="https://postiz.com/perplexity-computer">Perplexity Computer</a> ·
-  <a href="https://postiz.com/nanoclaw">nanoclaw</a> ·
-  <a href="https://postiz.com/paperclip">Paperclip</a> ·
-  <a href="https://postiz.com/mcp">MCP Server</a> ·
-  <a href="https://postiz.com/agent">AI Agents CLI</a>
+  <a href="https://tadween.app/chatgpt">ChatGPT</a> ·
+  <a href="https://tadween.app/claude">Claude</a> ·
+  <a href="https://tadween.app/cursor">Cursor</a> ·
+  <a href="https://tadween.app/ai-agent">Claude Code, Codex, Gemini CLI and other MCP clients</a> ·
+  <a href="https://tadween.app/ai-agent">AI Agents CLI</a>
 </p>
+
+> Tadween CLI and agent skill. Based on [Postiz](https://github.com/gitroomhq/postiz-agent) by gitroomhq, licensed under AGPL-3.0 (see [LICENSE](LICENSE)). Tadween is a product of Xerk LLC.
 
 ## Install as a skill
 
 ```bash
-npx skills add gitroomhq/postiz-agent
+npx skills add xerk/tadween-agent
 ```
 
 ### Claude Code plugin
 
 ```bash
-/plugin marketplace add gitroomhq/postiz-agent
-/plugin install postiz@postiz-agent
+/plugin marketplace add xerk/tadween-agent
+/plugin install tadween@tadween-agent
 ```
 
 ### Grok Build plugin
 
-Postiz is listed in the [xAI plugin marketplace](https://github.com/xai-org/plugin-marketplace) — install it from the marketplace inside Grok Build. This repo also carries its own `.grok-plugin/plugin.json` manifest and `.grok-plugin/marketplace.json` catalog, so it can be added as a marketplace source directly.
+This repo carries its own `.grok-plugin/plugin.json` manifest and `.grok-plugin/marketplace.json` catalog, so it can be added to Grok Build as a marketplace source directly.
 
-The Grok plugin also bundles the hosted Postiz MCP server (`https://mcp.postiz.com/mcp-oauth-dynamic`) via the `mcpServers` field in `.grok-plugin/plugin.json` — you'll be asked to sign in to Postiz on first connection; no token or local install needed. The Claude Code and Cursor plugins are skill/CLI-only and do not register an MCP server.
+The Grok plugin also bundles the hosted Tadween MCP server (`https://studio.tadween.app/mcp-oauth-dynamic`) via the `mcpServers` field in `.grok-plugin/plugin.json` — you'll be asked to sign in to Tadween on first connection; no token or local install needed. The Claude Code and Cursor plugins are skill/CLI-only and do not register an MCP server.
 
 ### Cursor plugin
 
 This repo ships a [Cursor plugin](https://cursor.com/docs/reference/plugins) manifest at `.cursor-plugin/plugin.json`.
 
-- **From the marketplace / Customize panel:** open **Customize** in the Cursor sidebar, find **postiz**, and select **Install** (project or user scope).
 - **Local install (development):**
 
   ```bash
-  git clone https://github.com/gitroomhq/postiz-agent.git
-  ln -s "$(pwd)/postiz-agent" ~/.cursor/plugins/local/postiz
+  git clone https://github.com/xerk/tadween-agent.git
+  ln -s "$(pwd)/tadween-agent" ~/.cursor/plugins/local/tadween
   ```
 
   then restart Cursor or run **Developer: Reload Window**.
 
-The plugin exposes the `postiz` skill, which drives the `postiz` CLI (the CLI handles media uploads, which is required for image/video posts). Make sure the CLI is installed (`npm install -g postiz`) and authenticated (`postiz auth:login` or `export POSTIZ_API_KEY=...`) before asking the agent to post.
+The plugin exposes the `tadween` skill, which drives the `tadween` CLI (the CLI handles media uploads, which is required for image/video posts). Make sure the CLI is installed (`npm install -g tadween`) and authenticated (`tadween auth:login` or `export TADWEEN_API_KEY=...`) before asking the agent to post.
 
 ### Gemini CLI extension
 
-This repo is a [Gemini CLI extension](https://geminicli.com/docs/extensions/) (`gemini-extension.json` at the root) and is indexed in the [extensions gallery](https://geminicli.com/extensions/browse/).
+This repo is a [Gemini CLI extension](https://geminicli.com/docs/extensions/) (`gemini-extension.json` at the root).
 
 ```bash
-gemini extensions install https://github.com/gitroomhq/postiz-agent
+gemini extensions install https://github.com/xerk/tadween-agent
 ```
 
-It installs the `postiz` skill and the hosted Postiz MCP server (`https://mcp.postiz.com/mcp-oauth-dynamic`). Gemini CLI opens a browser to sign in to Postiz on first use; run `/mcp auth postiz` to re-authenticate. The skill drives the `postiz` CLI for media uploads, so install it with `npm install -g postiz` for image or video posts.
+It installs the `tadween` skill and the hosted Tadween MCP server (`https://studio.tadween.app/mcp-oauth-dynamic`). Gemini CLI opens a browser to sign in to Tadween on first use; run `/mcp auth tadween` to re-authenticate. The skill drives the `tadween` CLI for media uploads, so install it with `npm install -g tadween` for image or video posts.
 
 ### Qwen Code
 
 Qwen Code installs Claude Code marketplaces directly, so no separate manifest is needed:
 
 ```bash
-qwen extensions install gitroomhq/postiz-agent:postiz
+qwen extensions install xerk/tadween-agent:tadween
 ```
 
 ### DeepSeek Harness plugin
 
-This repo ships a [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (`dsh`) bundle at [`plugins/dsh-postiz`](plugins/dsh-postiz). It connects the agent to the hosted Postiz MCP server and registers a `postiz` workflow skill.
+This repo ships a [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (`dsh`) bundle at [`plugins/dsh-tadween`](plugins/dsh-tadween). It connects the agent to the hosted Tadween MCP server and registers a `tadween` workflow skill.
 
 ```bash
-dsh plugin --profile web add "github:gitroomhq/postiz-agent#path:/plugins/dsh-postiz"
-export POSTIZ_API_KEY=your-api-key   # Postiz → Settings → Developers → Public API
+dsh plugin --profile web add "github:xerk/tadween-agent#path:/plugins/dsh-tadween"
+export TADWEEN_API_KEY=your-api-key   # Tadween → Settings → API & MCP
 dsh web
 ```
 
-The Postiz tools then appear as `mcp__postiz__*` (`integrationList`, `integrationSchema`, `schedulePostTool`, ...). Self-hosted instances override `baseUrl` on the `postiz` row. See the [plugin README](plugins/dsh-postiz/README.md) for configuration.
+The Tadween tools then appear as `mcp__tadween__*` (`integrationList`, `integrationSchema`, `schedulePostTool`, ...). Self-hosted instances override `baseUrl` on the `tadween` row. See the [plugin README](plugins/dsh-tadween/README.md) for configuration.
 
-# Postiz CLI
+# Tadween CLI
 
 **Social media automation CLI for AI agents** - Schedule posts across 28+ platforms programmatically.
 
-The Postiz CLI provides a command-line interface to the Postiz API, enabling developers and AI agents to automate social media posting, manage content, and handle media uploads across platforms like Twitter/X, LinkedIn, Reddit, YouTube, TikTok, Instagram, Facebook, and more.
+The Tadween CLI provides a command-line interface to the Tadween API, enabling developers and AI agents to automate social media posting, manage content, and handle media uploads across platforms like Twitter/X, LinkedIn, Reddit, YouTube, TikTok, Instagram, Facebook, and more.
 
 ---
 
@@ -100,9 +90,9 @@ The Postiz CLI provides a command-line interface to the Postiz API, enabling dev
 ### From npm (Recommended)
 
 ```bash
-npm install -g postiz
+npm install -g tadween
 # or
-pnpm install -g postiz
+pnpm install -g tadween
 ```
 
 ---
@@ -114,36 +104,36 @@ pnpm install -g postiz
 Authenticate using the device flow — no client ID or secret needed:
 
 ```bash
-postiz auth:login
+tadween auth:login
 ```
 
 This will:
 1. Display a one-time code in your terminal
 2. Open your browser to authorize
-3. Automatically save credentials to `~/.postiz/credentials.json`
+3. Automatically save credentials to `~/.tadween/credentials.json`
 
 ```bash
 # Check current auth status (verifies credentials are still valid)
-postiz auth:status
+tadween auth:status
 
 # Remove stored credentials
-postiz auth:logout
+tadween auth:logout
 ```
 
 #### Self-Hosting the Auth Server
 
-By default, `postiz auth:login` uses the hosted auth server at `cli-auth.postiz.com`. If you want to self-host the OAuth2 device flow server, follow the guide in [`server/SERVER.md`](./server/SERVER.md).
+By default, `tadween auth:login` uses the auth server at `cli-auth.tadween.app` (override with `--auth-server` or `TADWEEN_AUTH_SERVER`). If you want to self-host the OAuth2 device flow server, follow the guide in [`server/SERVER.md`](./server/SERVER.md).
 
 ### Option 2: API Key
 
 ```bash
-export POSTIZ_API_KEY=your_api_key_here
+export TADWEEN_API_KEY=your_api_key_here
 ```
 
 **Optional:** Custom API endpoint
 
 ```bash
-export POSTIZ_API_URL=https://your-custom-api.com
+export TADWEEN_API_URL=https://studio.tadween.app/api   # default; set it for a self-hosted instance
 ```
 
 > **Note:** OAuth2 credentials take priority over the API key when both are present.
@@ -156,30 +146,30 @@ export POSTIZ_API_URL=https://your-custom-api.com
 
 **List all connected integrations**
 ```bash
-postiz integrations:list
-postiz integrations:list --group "customer-id"
+tadween integrations:list
+tadween integrations:list --group "customer-id"
 ```
 
 Returns integration IDs, provider names, and metadata. Use `--group` to return only the channels assigned to a specific group (customer).
 
 **List all groups (customers)**
 ```bash
-postiz integrations:groups
+tadween integrations:groups
 ```
 
 Returns all groups (customers) for your organization as `{id, name}`. Use a group's `id` with `integrations:list --group` to filter channels.
 
 **Get integration settings schema**
 ```bash
-postiz integrations:settings <integration-id>
+tadween integrations:settings <integration-id>
 ```
 
 Returns character limits, required settings, and available tools for fetching dynamic data.
 
 **Trigger integration tools**
 ```bash
-postiz integrations:trigger <integration-id> <method-name>
-postiz integrations:trigger <integration-id> <method-name> -d '{"key":"value"}'
+tadween integrations:trigger <integration-id> <method-name>
+tadween integrations:trigger <integration-id> <method-name> -d '{"key":"value"}'
 ```
 
 Fetch dynamic data like Reddit flairs, YouTube playlists, LinkedIn companies, etc.
@@ -187,13 +177,13 @@ Fetch dynamic data like Reddit flairs, YouTube playlists, LinkedIn companies, et
 **Examples:**
 ```bash
 # Get Reddit flairs
-postiz integrations:trigger reddit-123 getFlairs -d '{"subreddit":"programming"}'
+tadween integrations:trigger reddit-123 getFlairs -d '{"subreddit":"programming"}'
 
 # Get YouTube playlists
-postiz integrations:trigger youtube-456 getPlaylists
+tadween integrations:trigger youtube-456 getPlaylists
 
 # Get LinkedIn companies
-postiz integrations:trigger linkedin-789 getCompanies
+tadween integrations:trigger linkedin-789 getCompanies
 ```
 
 ---
@@ -202,22 +192,22 @@ postiz integrations:trigger linkedin-789 getCompanies
 
 **Simple scheduled post**
 ```bash
-postiz posts:create -c "Content" -s "2024-12-31T12:00:00Z" -i "integration-id"
+tadween posts:create -c "Content" -s "2024-12-31T12:00:00Z" -i "integration-id"
 ```
 
 **Draft post**
 ```bash
-postiz posts:create -c "Content" -s "2024-12-31T12:00:00Z" -t draft -i "integration-id"
+tadween posts:create -c "Content" -s "2024-12-31T12:00:00Z" -t draft -i "integration-id"
 ```
 
 **Post with media**
 ```bash
-postiz posts:create -c "Content" -m "img1.jpg,img2.jpg" -s "2024-12-31T12:00:00Z" -i "integration-id"
+tadween posts:create -c "Content" -m "img1.jpg,img2.jpg" -s "2024-12-31T12:00:00Z" -i "integration-id"
 ```
 
 **Post with comments** (each comment can have its own media)
 ```bash
-postiz posts:create \
+tadween posts:create \
   -c "Main post" -m "main.jpg" \
   -c "First comment" -m "comment1.jpg" \
   -c "Second comment" -m "comment2.jpg,comment3.jpg" \
@@ -227,12 +217,12 @@ postiz posts:create \
 
 **Multi-platform post**
 ```bash
-postiz posts:create -c "Content" -s "2024-12-31T12:00:00Z" -i "twitter-id,linkedin-id,facebook-id"
+tadween posts:create -c "Content" -s "2024-12-31T12:00:00Z" -i "twitter-id,linkedin-id,facebook-id"
 ```
 
 **Platform-specific settings**
 ```bash
-postiz posts:create \
+tadween posts:create \
   -c "Content" \
   -s "2024-12-31T12:00:00Z" \
   --settings '{"subreddit":[{"value":{"subreddit":"programming","title":"Post Title","type":"text"}}]}' \
@@ -241,7 +231,7 @@ postiz posts:create \
 
 **Complex post from JSON file**
 ```bash
-postiz posts:create --json post.json
+tadween posts:create --json post.json
 ```
 
 **Options:**
@@ -261,30 +251,30 @@ postiz posts:create --json post.json
 
 **List posts**
 ```bash
-postiz posts:list
-postiz posts:list --startDate "2024-01-01T00:00:00Z" --endDate "2024-12-31T23:59:59Z"
-postiz posts:list --customer "customer-id"
+tadween posts:list
+tadween posts:list --startDate "2024-01-01T00:00:00Z" --endDate "2024-12-31T23:59:59Z"
+tadween posts:list --customer "customer-id"
 ```
 
 Defaults to last 30 days to next 30 days if dates not specified. Each returned post includes its current `settings` (returned as a JSON string — `JSON.parse` it). The intended workflow is `posts:list` (read current settings) → `posts:settings` (patch them).
 
 **Delete post**
 ```bash
-postiz posts:delete <post-id>
+tadween posts:delete <post-id>
 ```
 
 **Change post status (draft ↔ schedule)**
 ```bash
-postiz posts:status <post-id> --status draft
-postiz posts:status <post-id> --status schedule
+tadween posts:status <post-id> --status draft
+tadween posts:status <post-id> --status schedule
 ```
 
 Move a scheduled post back to a draft, or promote a draft into the publishing queue. Switching to `draft` also terminates any workflow that's already running for the post, so it won't publish. Switching to `schedule` queues the post for publishing at its stored date.
 
 **Update a post's provider-specific settings**
 ```bash
-postiz posts:settings <post-id> --settings '{"content_posting_method":"DIRECT_POST"}'
-postiz posts:settings <post-id> --settings '{"subreddit":[{"value":{"subreddit":"/r/selfhosted","title":"My title","type":"self","is_flair_required":true}}]}'
+tadween posts:settings <post-id> --settings '{"content_posting_method":"DIRECT_POST"}'
+tadween posts:settings <post-id> --settings '{"subreddit":[{"value":{"subreddit":"/r/selfhosted","title":"My title","type":"self","is_flair_required":true}}]}'
 ```
 
 Patches a post's settings server-side. The backend **merges** the object — only the keys you pass change, everything else is preserved — so pass a partial object, not the full settings blob. Only **DRAFT/QUEUE** (unpublished) posts can be updated; published posts are rejected. Pass the **main post id**, not a comment id. Do **not** include `__type` — the backend adds it automatically from the integration.
@@ -295,16 +285,16 @@ Patches a post's settings server-side. The backend **merges** the object — onl
 
 **Get platform analytics**
 ```bash
-postiz analytics:platform <integration-id>
-postiz analytics:platform <integration-id> -d 30
+tadween analytics:platform <integration-id>
+tadween analytics:platform <integration-id> -d 30
 ```
 
 Returns metrics like followers, impressions, and engagement over time for a specific integration/channel. The `-d` flag specifies the number of days to look back (default: 7).
 
 **Get post analytics**
 ```bash
-postiz analytics:post <post-id>
-postiz analytics:post <post-id> -d 30
+tadween analytics:post <post-id>
+tadween analytics:post <post-id> -d 30
 ```
 
 Returns metrics like likes, comments, shares, and impressions for a specific published post.
@@ -313,13 +303,13 @@ Returns metrics like likes, comments, shares, and impressions for a specific pub
 
 ```bash
 # 1. List available content from the provider
-postiz posts:missing <post-id>
+tadween posts:missing <post-id>
 
 # 2. Connect the correct content to the post
-postiz posts:connect <post-id> --release-id "7321456789012345678"
+tadween posts:connect <post-id> --release-id "7321456789012345678"
 
 # 3. Analytics will now work
-postiz analytics:post <post-id>
+tadween analytics:post <post-id>
 ```
 
 ---
@@ -330,14 +320,14 @@ Some platforms (e.g. TikTok) don't return a post ID immediately after publishing
 
 **List available content from the provider**
 ```bash
-postiz posts:missing <post-id>
+tadween posts:missing <post-id>
 ```
 
 Returns an array of `{id, url}` items representing recent content from the provider. Returns an empty array if the provider doesn't support this feature.
 
 **Connect a post to its published content**
 ```bash
-postiz posts:connect <post-id> --release-id "<content-id>"
+tadween posts:connect <post-id> --release-id "<content-id>"
 ```
 
 ---
@@ -346,15 +336,15 @@ postiz posts:connect <post-id> --release-id "<content-id>"
 
 **Upload file and get URL**
 ```bash
-postiz upload <file-path>
+tadween upload <file-path>
 ```
 
 **⚠️ IMPORTANT: Upload Files Before Posting**
 
-You **must** upload media files to Postiz before using them in posts. Many platforms (especially TikTok, Instagram, and YouTube) require verified/trusted URLs and will reject external links.
+You **must** upload media files to Tadween before using them in posts. Many platforms (especially TikTok, Instagram, and YouTube) require verified/trusted URLs and will reject external links.
 
 **Workflow:**
-1. Upload your file using `postiz upload`
+1. Upload your file using `tadween upload`
 2. Extract the returned URL
 3. Use that URL in your post's `-m` parameter
 
@@ -365,17 +355,17 @@ You **must** upload media files to Postiz before using them in posts. Many platf
 **Example:**
 ```bash
 # 1. Upload the file first
-RESULT=$(postiz upload video.mp4)
+RESULT=$(tadween upload video.mp4)
 PATH=$(echo "$RESULT" | jq -r '.path')
 
-# 2. Use the Postiz URL in your post
-postiz posts:create -c "Check out my video!" -s "2024-12-31T12:00:00Z" -m "$PATH" -i "tiktok-id"
+# 2. Use the Tadween URL in your post
+tadween posts:create -c "Check out my video!" -s "2024-12-31T12:00:00Z" -m "$PATH" -i "tiktok-id"
 ```
 
 **Why this is required:**
 - **TikTok, Instagram, YouTube** only accept URLs from trusted domains
 - **Security:** Platforms verify media sources to prevent abuse
-- **Reliability:** Postiz ensures your media is always accessible
+- **Reliability:** Tadween ensures your media is always accessible
 
 ---
 
@@ -385,8 +375,8 @@ Turn a long YouTube video into short vertical clips with burned-in captions. The
 
 **Start a clipping**
 ```bash
-postiz clipping:create "https://www.youtube.com/watch?v=VIDEO_ID"
-postiz clipping:create "https://www.youtube.com/watch?v=VIDEO_ID" -n 3 -f crop -i "tiktok-id,instagram-id"
+tadween clipping:create "https://www.youtube.com/watch?v=VIDEO_ID"
+tadween clipping:create "https://www.youtube.com/watch?v=VIDEO_ID" -n 3 -f crop -i "tiktok-id,instagram-id"
 ```
 
 | Option | Alias | Description |
@@ -399,15 +389,15 @@ Returns `{"id": "<clipping-id>"}` right away — clipping takes several minutes.
 
 **Check the status and get the clips**
 ```bash
-postiz clipping:status <clipping-id>
+tadween clipping:status <clipping-id>
 ```
 
 The `status` moves through `analysing`, `transcribing` (only when the video has no usable captions), `picking` and `rendering`, and ends on `completed` or `failed`. When completed, every clip carries its `title`, `content`, hosted video `path` and `thumbnail`. When failed, `error` says why and the clipping minutes are given back.
 
 **List clippings**
 ```bash
-postiz clipping:list
-postiz clipping:list --page 2
+tadween clipping:list
+tadween clipping:list --page 2
 ```
 
 Clipping uses the clipping minutes of your subscription: one minute for every minute of the source video. Only one clipping runs at a time per account.
@@ -419,10 +409,10 @@ Clipping uses the clipping minutes of your subscription: one minute for every mi
 ### Reddit
 ```bash
 # Get available flairs
-postiz integrations:trigger reddit-id getFlairs -d '{"subreddit":"programming"}'
+tadween integrations:trigger reddit-id getFlairs -d '{"subreddit":"programming"}'
 
 # Post with subreddit and flair
-postiz posts:create \
+tadween posts:create \
   -c "Content" \
   -s "2024-12-31T12:00:00Z" \
   --settings '{"subreddit":[{"value":{"subreddit":"programming","title":"My Post","type":"text","is_flair_required":true,"flair":{"id":"flair-123","name":"Discussion"}}}]}' \
@@ -432,14 +422,14 @@ postiz posts:create \
 ### YouTube
 ```bash
 # Get playlists
-postiz integrations:trigger youtube-id getPlaylists
+tadween integrations:trigger youtube-id getPlaylists
 
 # Upload video FIRST (required!)
-VIDEO=$(postiz upload video.mp4)
+VIDEO=$(tadween upload video.mp4)
 VIDEO_URL=$(echo "$VIDEO" | jq -r '.path')
 
 # Post with uploaded video URL
-postiz posts:create \
+tadween posts:create \
   -c "Video description" \
   -s "2024-12-31T12:00:00Z" \
   --settings '{"title":"Video Title","type":"public","tags":[{"value":"tech","label":"Tech"}],"playlistId":"playlist-id"}' \
@@ -450,11 +440,11 @@ postiz posts:create \
 ### TikTok
 ```bash
 # Upload video FIRST (TikTok only accepts verified URLs!)
-VIDEO=$(postiz upload video.mp4)
+VIDEO=$(tadween upload video.mp4)
 VIDEO_URL=$(echo "$VIDEO" | jq -r '.path')
 
 # Post with uploaded video URL
-postiz posts:create \
+tadween posts:create \
   -c "Video caption #fyp" \
   -s "2024-12-31T12:00:00Z" \
   --settings '{"privacy_level":"PUBLIC_TO_EVERYONE","duet":true,"stitch":true,"content_posting_method":"DIRECT_POST"}' \
@@ -465,10 +455,10 @@ postiz posts:create \
 ### LinkedIn
 ```bash
 # Get companies you can post to
-postiz integrations:trigger linkedin-id getCompanies
+tadween integrations:trigger linkedin-id getCompanies
 
 # Post as company
-postiz posts:create \
+tadween posts:create \
   -c "Company announcement" \
   -s "2024-12-31T12:00:00Z" \
   --settings '{"companyId":"company-123"}' \
@@ -478,7 +468,7 @@ postiz posts:create \
 ### X (Twitter)
 ```bash
 # Create thread
-postiz posts:create \
+tadween posts:create \
   -c "Thread 1/3 🧵" \
   -c "Thread 2/3" \
   -c "Thread 3/3" \
@@ -487,7 +477,7 @@ postiz posts:create \
   -i "twitter-id"
 
 # With reply settings
-postiz posts:create \
+tadween posts:create \
   -c "Tweet content" \
   -s "2024-12-31T12:00:00Z" \
   --settings '{"who_can_reply_post":"everyone"}' \
@@ -497,11 +487,11 @@ postiz posts:create \
 ### Instagram
 ```bash
 # Upload image FIRST (Instagram requires verified URLs!)
-IMAGE=$(postiz upload image.jpg)
+IMAGE=$(tadween upload image.jpg)
 IMAGE_URL=$(echo "$IMAGE" | jq -r '.path')
 
 # Regular post
-postiz posts:create \
+tadween posts:create \
   -c "Caption #hashtag" \
   -s "2024-12-31T12:00:00Z" \
   --settings '{"post_type":"post"}' \
@@ -509,10 +499,10 @@ postiz posts:create \
   -i "instagram-id"
 
 # Story (upload first)
-STORY=$(postiz upload story.jpg)
+STORY=$(tadween upload story.jpg)
 STORY_URL=$(echo "$STORY" | jq -r '.path')
 
-postiz posts:create \
+tadween posts:create \
   -c "" \
   -s "2024-12-31T12:00:00Z" \
   --settings '{"post_type":"story"}' \
@@ -541,7 +531,7 @@ This allows AI agents to adapt to different platforms without hardcoded knowledg
 For complex posts with multiple platforms and settings:
 
 ```bash
-postiz posts:create --json complex-post.json
+tadween posts:create --json complex-post.json
 ```
 
 JSON structure:
@@ -579,7 +569,7 @@ JSON structure:
 Every command outputs JSON for easy parsing:
 
 ```bash
-INTEGRATIONS=$(postiz integrations:list | jq -r '.')
+INTEGRATIONS=$(tadween integrations:list | jq -r '.')
 REDDIT_ID=$(echo "$INTEGRATIONS" | jq -r '.[] | select(.identifier=="reddit") | .id')
 ```
 
@@ -591,7 +581,7 @@ Comments are automatically converted to threads/replies based on platform:
 - **Instagram**: First comment
 
 ```bash
-postiz posts:create \
+tadween posts:create \
   -c "Main post" \
   -c "Comment 1" \
   -c "Comment 2" \
@@ -605,11 +595,11 @@ postiz posts:create \
 ### Reddit Post with Flair
 ```bash
 #!/bin/bash
-REDDIT_ID=$(postiz integrations:list | jq -r '.[] | select(.identifier=="reddit") | .id')
-FLAIRS=$(postiz integrations:trigger "$REDDIT_ID" getFlairs -d '{"subreddit":"programming"}')
+REDDIT_ID=$(tadween integrations:list | jq -r '.[] | select(.identifier=="reddit") | .id')
+FLAIRS=$(tadween integrations:trigger "$REDDIT_ID" getFlairs -d '{"subreddit":"programming"}')
 FLAIR_ID=$(echo "$FLAIRS" | jq -r '.output[0].id')
 
-postiz posts:create \
+tadween posts:create \
   -c "My post content" \
   -s "2024-12-31T12:00:00Z" \
   --settings "{\"subreddit\":[{\"value\":{\"subreddit\":\"programming\",\"title\":\"Post Title\",\"type\":\"text\",\"is_flair_required\":true,\"flair\":{\"id\":\"$FLAIR_ID\",\"name\":\"Discussion\"}}}]}" \
@@ -619,10 +609,10 @@ postiz posts:create \
 ### YouTube Video Upload
 ```bash
 #!/bin/bash
-VIDEO=$(postiz upload video.mp4)
+VIDEO=$(tadween upload video.mp4)
 VIDEO_PATH=$(echo "$VIDEO" | jq -r '.path')
 
-postiz posts:create \
+tadween posts:create \
   -c "Video description..." \
   -s "2024-12-31T12:00:00Z" \
   --settings '{"title":"My Video","type":"public","tags":[{"value":"tech","label":"Tech"}]}' \
@@ -633,7 +623,7 @@ postiz posts:create \
 ### Multi-Platform Campaign
 ```bash
 #!/bin/bash
-postiz posts:create \
+tadween posts:create \
   -c "Same content everywhere" \
   -s "2024-12-31T12:00:00Z" \
   -m "image.jpg" \
@@ -647,7 +637,7 @@ DATES=("2024-02-14T09:00:00Z" "2024-02-15T09:00:00Z" "2024-02-16T09:00:00Z")
 CONTENT=("Monday motivation 💪" "Tuesday tips 💡" "Wednesday wisdom 🧠")
 
 for i in "${!DATES[@]}"; do
-  postiz posts:create \
+  tadween posts:create \
     -c "${CONTENT[$i]}" \
     -s "${DATES[$i]}" \
     -i "twitter-id"
@@ -679,7 +669,7 @@ done
 
 ## API Endpoints
 
-The CLI interacts with these Postiz API endpoints:
+The CLI interacts with these Tadween API endpoints:
 
 | Endpoint | Method | Purpose |
 |----------|--------|---------|
@@ -706,11 +696,11 @@ The CLI interacts with these Postiz API endpoints:
 
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
-| `POSTIZ_API_KEY` | No* | - | Your Postiz API key |
-| `POSTIZ_API_URL` | No | `https://api.postiz.com` | Custom API endpoint |
-| `POSTIZ_AUTH_SERVER` | No | `https://cli-auth.postiz.com` | Custom auth server URL |
+| `TADWEEN_API_KEY` | No* | - | Your Tadween API key |
+| `TADWEEN_API_URL` | No | `https://studio.tadween.app/api` | Custom API endpoint |
+| `TADWEEN_AUTH_SERVER` | No | `https://cli-auth.tadween.app` | Custom auth server URL |
 
-*Either OAuth2 (via `postiz auth:login`) or `POSTIZ_API_KEY` is required.
+*Either OAuth2 (via `tadween auth:login`) or `TADWEEN_API_KEY` is required.
 
 ---
 
@@ -725,7 +715,7 @@ The CLI provides clear error messages with exit codes:
 
 | Error | Solution |
 |-------|----------|
-| `Not authenticated` | Run `postiz auth:login` or set `POSTIZ_API_KEY` |
+| `Not authenticated` | Run `tadween auth:login` or set `TADWEEN_API_KEY` |
 | `Integration not found` | Run `integrations:list` to get valid IDs |
 | `startDate/endDate required` | Use ISO 8601 format: `"2024-12-31T12:00:00Z"` |
 | `Invalid settings` | Check `integrations:settings` for required fields |
@@ -784,75 +774,74 @@ Output in `dist/`:
 
 ```bash
 # Authentication
-postiz auth:login                                              # OAuth2 device flow
-postiz auth:status                                             # Check auth
-postiz auth:logout                                             # Remove credentials
-export POSTIZ_API_KEY=your_key                                 # Or use API key
+tadween auth:login                                              # OAuth2 device flow
+tadween auth:status                                             # Check auth
+tadween auth:logout                                             # Remove credentials
+export TADWEEN_API_KEY=your_key                                 # Or use API key
 
 # Discovery
-postiz integrations:list                           # List integrations
-postiz integrations:list --group "<group-id>"      # List integrations in a group
-postiz integrations:groups                         # List groups (customers)
-postiz integrations:settings <id>                  # Get settings
-postiz integrations:trigger <id> <method> -d '{}'  # Fetch data
+tadween integrations:list                           # List integrations
+tadween integrations:list --group "<group-id>"      # List integrations in a group
+tadween integrations:groups                         # List groups (customers)
+tadween integrations:settings <id>                  # Get settings
+tadween integrations:trigger <id> <method> -d '{}'  # Fetch data
 
 # Posting (date is required)
-postiz posts:create -c "text" -s "2024-12-31T12:00:00Z" -i "id"                    # Simple
-postiz posts:create -c "text" -s "2024-12-31T12:00:00Z" -t draft -i "id"          # Draft
-postiz posts:create -c "text" -m "img.jpg" -s "2024-12-31T12:00:00Z" -i "id"      # With media
-postiz posts:create -c "main" -c "comment" -s "2024-12-31T12:00:00Z" -i "id"      # With comment
-postiz posts:create -c "text" -s "2024-12-31T12:00:00Z" --settings '{}' -i "id"   # Platform-specific
-postiz posts:create --json file.json                                               # Complex
+tadween posts:create -c "text" -s "2024-12-31T12:00:00Z" -i "id"                    # Simple
+tadween posts:create -c "text" -s "2024-12-31T12:00:00Z" -t draft -i "id"          # Draft
+tadween posts:create -c "text" -m "img.jpg" -s "2024-12-31T12:00:00Z" -i "id"      # With media
+tadween posts:create -c "main" -c "comment" -s "2024-12-31T12:00:00Z" -i "id"      # With comment
+tadween posts:create -c "text" -s "2024-12-31T12:00:00Z" --settings '{}' -i "id"   # Platform-specific
+tadween posts:create --json file.json                                               # Complex
 
 # Management
-postiz posts:list                                  # List posts
-postiz posts:delete <id>                          # Delete post
-postiz posts:status <id> --status draft           # Move to draft (stops workflow)
-postiz posts:status <id> --status schedule        # Queue draft for publishing
-postiz posts:settings <id> --settings '{}'        # Patch a post's settings (merged; DRAFT/QUEUE only)
-postiz upload <file>                              # Upload media
+tadween posts:list                                  # List posts
+tadween posts:delete <id>                          # Delete post
+tadween posts:status <id> --status draft           # Move to draft (stops workflow)
+tadween posts:status <id> --status schedule        # Queue draft for publishing
+tadween posts:settings <id> --settings '{}'        # Patch a post's settings (merged; DRAFT/QUEUE only)
+tadween upload <file>                              # Upload media
 
 # Analytics
-postiz analytics:platform <id>                    # Platform analytics (7 days)
-postiz analytics:platform <id> -d 30             # Platform analytics (30 days)
-postiz analytics:post <id>                        # Post analytics (7 days)
-postiz analytics:post <id> -d 30                 # Post analytics (30 days)
+tadween analytics:platform <id>                    # Platform analytics (7 days)
+tadween analytics:platform <id> -d 30             # Platform analytics (30 days)
+tadween analytics:post <id>                        # Post analytics (7 days)
+tadween analytics:post <id> -d 30                 # Post analytics (30 days)
 # If analytics:post returns {"missing": true}, resolve it:
-postiz posts:missing <id>                         # List provider content
-postiz posts:connect <id> --release-id "<rid>"    # Connect content to post
+tadween posts:missing <id>                         # List provider content
+tadween posts:connect <id> --release-id "<rid>"    # Connect content to post
 
 # Help
-postiz --help                                     # Show help
-postiz posts:create --help                        # Command help
+tadween --help                                     # Show help
+tadween posts:create --help                        # Command help
 ```
 
 ---
 
 ## Contributing
 
-This CLI is part of the [Postiz monorepo](https://github.com/gitroomhq/postiz-app).
+Issues and pull requests: [xerk/tadween-agent](https://github.com/xerk/tadween-agent).
 
-To contribute:
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes in `apps/cli/`
-4. Run tests: `pnpm run build`
+2. Create a feature branch from `tadween`
+3. Make your changes in `src/`
+4. Build: `pnpm run build`
 5. Submit a pull request
 
 ---
 
-## License
+## Credits and license
 
-AGPL-3.0
+Tadween CLI is based on the [Postiz CLI and agent skill](https://github.com/gitroomhq/postiz-agent) by gitroomhq (Nevo David), and stays under the same license: AGPL-3.0. See [LICENSE](LICENSE).
 
 ---
 
 ## Links
 
-- **Website:** [postiz.com](https://postiz.com)
-- **API Docs:** [docs.postiz.com](https://docs.postiz.com)
-- **GitHub:** [gitroomhq/postiz-app](https://github.com/gitroomhq/postiz-app)
-- **Issues:** [Report bugs](https://github.com/gitroomhq/postiz-app/issues)
+- **Website:** [tadween.app](https://tadween.app)
+- **AI agents and MCP:** [tadween.app/ai-agent](https://tadween.app/ai-agent)
+- **GitHub:** [xerk/tadween-agent](https://github.com/xerk/tadween-agent)
+- **Issues:** [Report bugs](https://github.com/xerk/tadween-agent/issues)
 
 ---
 

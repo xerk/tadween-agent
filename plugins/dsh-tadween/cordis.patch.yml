@@ -1,0 +1,38 @@
+# Patch layer contributed by the dsh-tadween bundle.
+#
+# Two rows:
+#   1. `tadween`      - this package's provider plugin. Reads the Tadween API key
+#                      (TADWEEN_API_KEY by default), exposes `ctx.tadween` with the
+#                      MCP endpoint URL and auth headers, and registers the
+#                      `tadween` skill that teaches the agent the posting workflow.
+#   2. `tadween-mcp`  - one @deepseek-ai/dsh-mcp-client instance that connects to
+#                      the Tadween MCP server over streamable HTTP and registers
+#                      its tools as mcp__tadween__* (integrationList,
+#                      integrationSchema, schedulePostTool, ...).
+#
+# Configuration (override the `tadween` row in your profile's cordis.patch.yml):
+#   apiKeyEnv  - env var holding the Tadween API key (default: TADWEEN_API_KEY)
+#   apiKey     - inline key; prefer the env var or a .env file in $DSH_HOME
+#   baseUrl    - Tadween host (default: https://studio.tadween.app; self-hosted
+#                instances use their own backend URL)
+#   skill      - register the `tadween` workflow skill (default: true)
+- insert:
+    - id: tadween
+      name: dsh-tadween
+      config:
+        apiKeyEnv: TADWEEN_API_KEY
+        baseUrl: https://studio.tadween.app
+    - id: tadween-mcp
+      name: '@deepseek-ai/dsh-mcp-client'
+      inject: [tadween]
+      config:
+        transport: streamable-http
+        serverName: tadween
+        url: !!js ctx.tadween.url
+        headers: !!js ctx.tadween.headers
+        failOnStartupError: false
+        reconnect:
+          enabled: true
+          initialDelayMs: 2000
+          maxDelayMs: 30000
+          maxAttempts: 10

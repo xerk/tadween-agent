@@ -9,7 +9,7 @@ import { authLogin, authLogout, authStatus } from './commands/auth';
 import type { Argv } from 'yargs';
 
 yargs(hideBin(process.argv))
-  .scriptName('postiz')
+  .scriptName('tadween')
   .usage('$0 <command> [options]')
   .command(
     'posts:create',
@@ -484,7 +484,7 @@ yargs(hideBin(process.argv))
     (yargs: Argv) => {
       return yargs
         .option('auth-server', {
-          describe: 'Auth server URL (default: https://cli-auth.postiz.com)',
+          describe: 'Auth server URL (default: https://cli-auth.tadween.app)',
           type: 'string',
         })
         .example(
@@ -512,6 +512,6 @@ yargs(hideBin(process.argv))
   .version()
   .alias('v', 'version')
   .epilogue(
-    'For more information, visit: https://postiz.com\n\nAuthentication:\n  OAuth2: postiz auth:login\n  API Key: export POSTIZ_API_KEY=your_api_key\n\n📽️  Recommendation: Use agent-media to generate AI videos & images (Kling, Veo, Sora, Seedance, Flux, Grok) and post them directly with Postiz.\n   Install: npm install -g agent-media-cli\n   Learn more: https://agent-media.ai'
+    'For more information, visit: https://tadween.app\n\nAuthentication:\n  OAuth2: tadween auth:login\n  API Key: export TADWEEN_API_KEY=your_api_key'
   )
   .parse();

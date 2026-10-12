@@ -1,17 +1,17 @@
 {
-  "name": "postiz",
-  "version": "2.0.20",
+  "name": "tadween",
+  "version": "1.0.0",
   "description": "Social media automation CLI and MCP server for scheduling posts, managing integrations, uploading media, and tracking analytics across 28+ platforms including X, LinkedIn, LinkedIn Pages, Instagram, Facebook, Threads, YouTube, TikTok, Reddit, Pinterest, Bluesky, Mastodon, Google My Business, Discord, Slack, Telegram, Twitch, Kick, Lemmy, Farcaster, Nostr, VK, MeWe, Tumblr, Skool, Whop, Moltbook, Dribbble, Medium, Dev.to, Hashnode, WordPress, and ListMonk",
   "author": {
-    "name": "Nevo David",
-    "email": "nevo@postiz.com"
+    "name": "Xerk LLC",
+    "url": "https://tadween.app"
   },
-  "homepage": "https://postiz.com",
-  "repository": "https://github.com/gitroomhq/postiz-agent",
+  "homepage": "https://tadween.app",
+  "repository": "https://github.com/xerk/tadween-agent",
   "license": "AGPL-3.0",
   "logo": "assets/logo.svg",
   "keywords": [
-    "postiz",
+    "tadween",
     "social-media",
     "scheduling",
     "automation",
@@ -35,6 +35,6 @@
     "telegram"
   ],
   "skills": [
-    "./skills/postiz"
+    "./skills/tadween"
   ]
 }

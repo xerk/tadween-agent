@@ -1,18 +1,18 @@
 {
-  "name": "postiz",
-  "version": "2.0.20",
-  "description": "Postiz CLI - Command line interface for the Postiz social media scheduling API",
+  "name": "tadween",
+  "version": "1.0.0",
+  "description": "Tadween CLI - Command line interface for the Tadween social media scheduling API",
   "main": "dist/index.js",
   "bin": {
-    "postiz": "./dist/index.js"
+    "tadween": "./dist/index.js"
   },
   "scripts": {
     "dev": "tsup --watch",
-    "sync-skill": "cp SKILL.md skills/postiz/SKILL.md",
+    "sync-skill": "cp SKILL.md skills/tadween/SKILL.md",
     "build": "tsup",
     "start": "node ./dist/index.js",
     "prepublishOnly": "pnpm run build",
-    "publish": "tsup && pnpm publish --access public --no-git-checks"
+    "release": "tsup && pnpm publish --access public --no-git-checks"
   },
   "files": [
     "dist",
@@ -22,7 +22,7 @@
     "LICENSE"
   ],
   "keywords": [
-    "postiz",
+    "tadween",
     "cli",
     "social-media",
     "scheduling",
@@ -37,15 +37,15 @@
     "youtube",
     "reddit"
   ],
-  "author": "Nevo David",
+  "author": "Xerk LLC",
   "license": "AGPL-3.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gitroomhq/postiz-agent.git"
+    "url": "git+https://github.com/xerk/tadween-agent.git"
   },
-  "homepage": "https://github.com/gitroomhq/postiz-agent#readme",
+  "homepage": "https://tadween.app",
   "bugs": {
-    "url": "https://github.com/gitroomhq/postiz-agent/issues"
+    "url": "https://github.com/xerk/tadween-agent/issues"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -60,5 +60,8 @@
     "@types/yargs": "^17.0.32",
     "tsup": "^8.5.1",
     "typescript": "^5.3.3"
-  }
+  },
+  "contributors": [
+    "Nevo David (original Postiz CLI, https://github.com/gitroomhq/postiz-agent)"
+  ]
 }

@@ -1,7 +1,7 @@
 name: Sync plugin skill on release
 
-# Regenerates skills/postiz/SKILL.md from the root SKILL.md whenever a GitHub
-# release is published, and commits it to main so the Claude Code / Cursor
+# Regenerates skills/tadween/SKILL.md from the root SKILL.md whenever a GitHub
+# release is published, and commits it to the tadween branch so the Claude Code / Cursor
 # plugin manifests always point at an up-to-date, real (non-symlink) file.
 
 on:
@@ -18,21 +18,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: tadween
 
       - name: Copy SKILL.md into the plugin skill directory
         run: |
-          mkdir -p skills/postiz
-          cp SKILL.md skills/postiz/SKILL.md
+          mkdir -p skills/tadween
+          cp SKILL.md skills/tadween/SKILL.md
 
       - name: Commit and push if changed
         run: |
-          if git diff --quiet -- skills/postiz/SKILL.md; then
-            echo "skills/postiz/SKILL.md already up to date"
+          if git diff --quiet -- skills/tadween/SKILL.md; then
+            echo "skills/tadween/SKILL.md already up to date"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add skills/postiz/SKILL.md
+          git add skills/tadween/SKILL.md
           git commit -m "chore: sync plugin skill for ${{ github.event.release.tag_name || 'manual run' }}"
-          git push origin main
+          git push origin tadween
