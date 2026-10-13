@@ -12,7 +12,7 @@ Publishing runs in GitHub Actions (`.github/workflows/publish.yml`) with npm pro
 ## One-time setup
 
 1. Create (or sign in to) the npm account that owns the packages, with 2FA on.
-2. npm → Access Tokens → Generate New Token → Granular Access Token, with read and write on packages (or a classic Automation token).
+2. npm → Access Tokens → Generate New Token → Granular Access Token, with read and write on all packages and "Bypass 2FA" on (or a classic Automation token). Without the bypass, CI publishing fails with EOTP.
 3. GitHub → this repository → Settings → Secrets and variables → Actions → New repository secret `NPM_TOKEN` with that token.
 4. GitHub → this repository → Actions: enable workflows (forks start with them off).
 
